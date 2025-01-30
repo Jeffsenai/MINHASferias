@@ -1,227 +1,255 @@
 /* Estilos Gerais */
 body {
-    margin: 0;
-    overflow: hidden;
-    font-family: 'Arial', sans-serif;
-    background: linear-gradient(to bottom, #87CEEB, #1E90FF); /* Degradê de céu para mar */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-  }
-  
-  h1 {
-    color: #fff;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-    margin-bottom: 20px;
-    font-size: 2.5rem;
-  }
-  
-  /* Container do Jogo */
-  .game-container {
-    position: relative;
-    width: 100vw;
-    height: 90vh;
-    overflow: hidden;
-  }
-  
-  /* Animação das Nuvens */
-  .clouds {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 200%;
-    height: 100px;
-    background: url('clouds.png') repeat-x;
-    animation: move-clouds 20s linear infinite;
-  }
-  
-  @keyframes move-clouds {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
-  }
-  
-  /* Animação do Oceano */
-  .ocean {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 40%;
-    background: #1E90FF;
-  }
-  
-  .wave {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 20px;
-    
-    animation: move-waves 5s linear infinite;
-  }
-  
-  .wave:nth-child(2) {
-    bottom: 10px;
-    opacity: 0.5;
-    animation-duration: 7s;
-  }
-  
-  @keyframes move-waves {
-    from { transform: translateX(0); }
-    to { transform: translateX(-100%); }
-  }
-  
-  /* Personagem */
-  #player {
-    position: absolute;
-    width: 50px;
-    height: 50px;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    transition: top 0.1s, left 0.1s;
-    border-radius: 50%;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    animation: walk 0.5s steps(4) infinite;
-  }
-  
-  @keyframes walk {
-    from { background-position: 0; }
-    to { background-position: -200px; }
-  }
-  
-  /* Destinos */
-  .destination {
-    position: absolute;
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    transition: transform 0.2s ease;
-    animation: pulse 2s infinite;
-  }
-  
-  .destination:hover {
-    transform: scale(1.1);
-  }
-  
-  .destination img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 50%;
-  }
-  
-  .destination-label {
-    position: absolute;
-    bottom: -20px;
-    font-size: 14px;
-    color: white;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
-  }
-  
-  @keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-    100% { transform: scale(1); }
-  }
-  
-  /* Posicionamento dos Destinos */
-  #aeroporto {
-    top: 10%;
-    left: 10%;
-  }
-  
-  #praia {
-    top: 70%;
-    left: 80%;
-  }
-  
-  #hotel {
-    top: 20%;
-    left: 70%;
-  }
-  
-  #restaurante {
-    top: 60%;
-    left: 20%;
-  }
-  
-  #parque {
-    top: 40%;
-    left: 50%;
-  }
-  
-  /* Modal de História */
-  .modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-    animation: fadeIn 0.3s ease;
-  }
-  
-  .modal-content {
-    background-color: white;
-    padding: 20px;
-    border-radius: 10px;
-    text-align: center;
-    max-width: 400px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-    animation: slideIn 0.3s ease;
-  }
-  
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
-  
-  @keyframes slideIn {
-    from { transform: translateY(-20px); }
-    to { transform: translateY(0); }
-  }
-  
-  #story-title {
-    font-size: 24px;
-    margin-bottom: 10px;
-  }
-  
-  #story-image {
-    width: 100%;
-    height: 150px;
-    object-fit: cover;
-    border-radius: 10px;
-    margin-bottom: 10px;
-  }
-  
-  #story-description {
-    font-size: 16px;
-    margin-bottom: 20px;
-  }
-  
-  #close-modal {
-    padding: 10px 20px;
-    background-color: #007BFF;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
-  }
-  
-  #close-modal:hover {
-    background-color: #0056b3;
-  }
+  margin: 0;
+  overflow: hidden;
+  font-family: 'Arial', sans-serif;
+  background: linear-gradient(to bottom, #87CEEB, #1E90FF); /* Degradê de céu para mar */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+h1 {
+  color: #fff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  margin-bottom: 20px;
+  font-size: 2.5rem;
+}
+
+/* Container do Jogo */
+.game-container {
+  position: relative;
+  width: 100vw;
+  height: 90vh;
+  overflow: hidden;
+}
+
+/* Animação das Nuvens */
+.clouds {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200%;
+  height: 100px;
+  background: url('nuvens.png') repeat-x;
+  animation: move-clouds 20s linear infinite;
+}
+
+@keyframes move-clouds {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* Animação do Oceano */
+.ocean {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 40%;
+  background: #1E90FF;
+}
+
+.wave {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 20px;
+  background: url('w') repeat-x;
+  animation: move-waves 5s linear infinite;
+}
+
+.wave:nth-child(2) {
+  bottom: 10px;
+  opacity: 0.5;
+  animation-duration: 7s;
+}
+
+@keyframes move-waves {
+  from { transform: translateX(0); }
+  to { transform: translateX(-100%); }
+}
+
+/* Personagem */
+#player {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: top 0.1s, left 0.1s;
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  animation: walk 0.5s steps(4) infinite;
+}
+
+@keyframes walk {
+  from { background-position: 0; }
+  to { background-position: -200px; }
+}
+
+/* Destinos */
+.destination {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  transition: transform 0.2s ease;
+  animation: pulse 2s infinite;
+}
+
+.destination:hover {
+  transform: scale(1.1);
+}
+
+.destination img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.destination-label {
+  position: absolute;
+  bottom: -20px;
+  font-size: 14px;
+  color: white;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+/* Posicionamento dos Destinos */
+#aeroporto {
+  top: 10%;
+  left: 10%;
+}
+
+#praia {
+  top: 70%;
+  left: 80%;
+}
+
+#hotel {
+  top: 20%;
+  left: 70%;
+}
+
+#restaurante {
+  top: 60%;
+  left: 20%;
+}
+
+#parque {
+  top: 40%;
+  left: 50%;
+}
+
+/* Carrossel da Praia */
+#praia-carousel {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#praia-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  transition: opacity 0.5s ease;
+}
+
+#praia-label {
+  position: absolute;
+  bottom: -20px;
+  font-size: 14px;
+  color: white;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+  transition: opacity 0.5s ease;
+}
+
+/* Modal de História */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease;
+}
+
+.modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  max-width: 400px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  animation: slideIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideIn {
+  from { transform: translateY(-20px); }
+  to { transform: translateY(0); }
+}
+
+#story-title {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+#story-image {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+#story-description {
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+#close-modal {
+  padding: 10px 20px;
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+#close-modal:hover {
+  background-color: #0056b3;
+}

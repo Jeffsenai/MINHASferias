@@ -1,9 +1,6 @@
 const player = document.getElementById('player');
-const aeroporto = document.getElementById('aeroporto');
-const praia = document.getElementById('praia');
-const hotel = document.getElementById('hotel');
-const restaurante = document.getElementById('restaurante');
-const parque = document.getElementById('parque');
+const praiaImage = document.getElementById('praia-image');
+const praiaLabel = document.getElementById('praia-label');
 const storyModal = document.getElementById('story-modal');
 const storyTitle = document.getElementById('story-title');
 const storyImage = document.getElementById('story-image');
@@ -19,29 +16,38 @@ const destinations = {
   aeroporto: {
     title: "Aeroporto",
     image: "aeroporto.png",
-    description: "Você chegou ao aeroporto! Prepare-se para uma aventura incrível."
+    description: "Cheguei em Maceió na véspera de ano novo. Curiosidade: Fui revistado pela Polícia Federal"
   },
   praia: {
     title: "Praia",
-    image: "praia.jpg",
-    description: "Você chegou à praia! Aproveite o sol, o mar e a brisa."
+    image: "praia.jpg", 
+    description: "Fui em umas 5 praias diferentes"
   },
   hotel: {
     title: "Hotel",
     image: "hotel.png",
-    description: "Você chegou ao hotel! Hora de descansar e recarregar as energias."
+    description: "Fiquei em um hotel que tinha um monte de gringo, falei com um mexicano, um americano e um argentino"
   },
   restaurante: {
     title: "Restaurante",
     image: "restaurante.jpg",
-    description: "Você chegou ao restaurante! Delicie-se com os pratos locais."
+    description: "Restaurante/Quiosque na beira da Praia, que tem pagode ao vivo e comidas típicas"
   },
   parque: {
-    title: "Parque",
-    image: "parque.jpg",
-    description: "Você chegou ao parque! Aproveite a natureza e a tranquilidade."
+    title: "Marco dos corais",
+    image: "corais.jpeg",
+    description: "Um dos melhores lugares para ver o por do sol e o nascer do dia, fica sob o mar"
   }
 };
+
+// Dados das praias (para o carrossel)
+const praias = [
+  { image: "praia.jpg", label: "Praia de Pajuçara" },
+  { image: "praia2.jpg", label: "Praia de Ponta Verde" },
+  { image: "waves.jpg", label: "Praia de Jatiúca" }
+];
+let praiaIndex = 0;
+let carouselInterval;
 
 // Função para mover o personagem
 function movePlayer(event) {
@@ -73,23 +79,43 @@ function movePlayer(event) {
 // Verifica colisão com destinos
 function checkCollision() {
   const playerRect = player.getBoundingClientRect();
-  const aeroportoRect = aeroporto.getBoundingClientRect();
-  const praiaRect = praia.getBoundingClientRect();
-  const hotelRect = hotel.getBoundingClientRect();
-  const restauranteRect = restaurante.getBoundingClientRect();
-  const parqueRect = parque.getBoundingClientRect();
+  const aeroportoRect = document.getElementById('aeroporto').getBoundingClientRect();
+  const praiaRect = document.getElementById('praia').getBoundingClientRect();
+  const hotelRect = document.getElementById('hotel').getBoundingClientRect();
+  const restauranteRect = document.getElementById('restaurante').getBoundingClientRect();
+  const parqueRect = document.getElementById('parque').getBoundingClientRect();
 
   if (isColliding(playerRect, aeroportoRect)) {
     showStory(destinations.aeroporto);
   } else if (isColliding(playerRect, praiaRect)) {
-    showStory(destinations.praia);
+    startCarousel(); // Inicia o carrossel da praia
+    showStory(destinations.praia); // Mostra o modal da praia
   } else if (isColliding(playerRect, hotelRect)) {
     showStory(destinations.hotel);
   } else if (isColliding(playerRect, restauranteRect)) {
     showStory(destinations.restaurante);
   } else if (isColliding(playerRect, parqueRect)) {
     showStory(destinations.parque);
+  } else {
+    stopCarousel(); // Para o carrossel se o personagem sair da praia
   }
+}
+
+// Inicia o carrossel da praia
+function startCarousel() {
+  if (carouselInterval) return; // Evita múltiplos intervalos
+  carouselInterval = setInterval(() => {
+    praiaIndex = (praiaIndex + 1) % praias.length; // Avança para a próxima praia
+    praiaImage.src = praias[praiaIndex].image; // Atualiza a imagem
+    praiaLabel.textContent = praias[praiaIndex].label; // Atualiza o nome
+    destinations.praia.image = praias[praiaIndex].image; // Atualiza a imagem no modal
+  }, 3000); // Muda a cada 3 segundos
+}
+
+// Para o carrossel da praia
+function stopCarousel() {
+  clearInterval(carouselInterval);
+  carouselInterval = null;
 }
 
 // Verifica se dois elementos estão colidindo
